@@ -1,3 +1,4 @@
 
-#[About shell in linux]
-##[variable]
+# About shell in linux
+
+## variable
