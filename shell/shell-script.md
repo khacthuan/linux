@@ -30,6 +30,26 @@ else
 	...
 fi
 ```
+Multi condition
+```
+if condition
+then
+           condition is zero (true - 0)
+           execute all commands up to elif statement
+elif condition1 
+then
+           condition1 is zero (true - 0)
+           execute all commands up to elif statement  
+elif condition2
+then
+           condition2 is zero (true - 0)
+           execute all commands up to elif statement          
+else
+           None of the above condtion,condtion1,condtion2 are true (i.e. 
+           all of the above nonzero or false)
+           execute all commands up to fi
+fi
+```
 
 Example:
 ```
@@ -43,6 +63,69 @@ then
 else
 	echo "$1 number is nExampleotive"
 fi
+```
+
+```
+#!/bin/sh
+# Script to test if..elif...else
+#
+if [ $1 -gt 0 ]; then
+  echo "$1 is positive"
+elif [ $1 -lt 0 ]
+then
+  echo "$1 is negative"
+elif [ $1 -eq 0 ]
+then
+  echo "$1 is zero"
+else
+  echo "Opps! $1 is not number, give number"
+fi
+```
+
+### Case
+```
+case  $variable-name  in
+	pattern1)   command
+				...
+				..
+				command;;
+	pattern2)   command
+				...
+				..
+				command;;
+	patternN)   command
+				...
+				..
+				command;;
+	*)			command
+				...
+				..
+				command;;
+esac
+```
+Example:
+```
+# if no vehicle name is given
+# i.e. -z $1 is defined and it is NULL
+#
+# if no command line arg
+
+if [ -z $1 ]
+then
+  rental="*** Unknown vehicle ***"
+elif [ -n $1 ]
+then
+# otherwise make first arg as rental
+  rental=$1
+fi
+
+case $rental in
+   "car") echo "For $rental Rs.20 per k/m";;
+   "van") echo "For $rental Rs.10 per k/m";;
+   "jeep") echo "For $rental Rs.5 per k/m";;
+   "bicycle") echo "For $rental 20 paisa per k/m";;
+   *) echo "Sorry, I can not gat a $rental for you";;
+esac
 ```
 
 ## For loop
@@ -147,3 +230,13 @@ expression1 -a expression2 	Logical AND
 expression1 -o expression2 	Logical OR
 ```
 **Rule of thumb:** Use ```-a``` and ```-o``` inside square brackets, ```&&``` and ```||``` outside.
+
+### Special variable
+```
+$?: Exit status (0 - if previous command is successful, !0 - command is not successful or some sort of error executing command/shell script.)
+$#: Number of parameter parse to shell script
+$*, $@: All arguments to shell
+$$: PID of shell
+$!: PID of last started background process (started with &)
+```
+
